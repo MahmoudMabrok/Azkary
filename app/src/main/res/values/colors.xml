@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="categor_sabah">#39f7e1</color>
+    <color name="category_masa">#a79b9f</color>
+    <color name="cat1_item">#f1750f</color>
+    <color name="cat2_item">#9ef139</color>
+    <color name="cat3_item">#219bed</color>
+    <color name="cat4_item">#e6aff4</color>
+    <color name="font_color">#ffffff</color>
+    <color name="list_back">#f7b42f</color>
+    <color name="black">#262625</color>
+
+</resources>

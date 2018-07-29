@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.mahmoudmabrok.azakri.MainActivity">
+
+    <TextView
+        android:id="@+id/sabah"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/categor_sabah"
+        android:gravity="center_horizontal"
+        android:minHeight="@dimen/category_height"
+        android:onClick="showSabah"
+        android:padding="16dp"
+        android:text="@string/sabah"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textSize="@dimen/text_size" />
+
+    <TextView
+        android:id="@+id/masa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/category_masa"
+        android:gravity="center_horizontal"
+        android:minHeight="@dimen/category_height"
+        android:onClick="showMasa"
+        android:padding="16dp"
+        android:text="@string/masa"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textSize="@dimen/text_size" />
+
+    <include
+        layout="@layout/card"
+        android:layout_width="184dp"></include>
+
+</LinearLayout>
