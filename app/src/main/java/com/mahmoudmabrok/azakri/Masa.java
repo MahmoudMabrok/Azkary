@@ -31,7 +31,7 @@ public class Masa extends Activity {
         Data data = new Data();
         mDate = data.getMasa();
 
-        mCardAdapter = new CardAdapter(this, data.getMasa());
+        mCardAdapter = new CardAdapter(this, mDate);
         swipeStack = (SwipeStack) findViewById(R.id.swipeStack);
         swipeStack.setAdapter(mCardAdapter);
     }

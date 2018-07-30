@@ -3,15 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/back_img"
+    android:gravity="center"
     android:orientation="vertical"
     tools:context="com.mahmoudmabrok.azakri.MainActivity">
 
     <TextView
         android:id="@+id/sabah"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_100sdp"
+        android:layout_marginBottom="@dimen/_50sdp"
         android:background="@color/categor_sabah"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:minHeight="@dimen/category_height"
         android:onClick="showSabah"
         android:padding="16dp"
@@ -21,19 +24,15 @@
 
     <TextView
         android:id="@+id/masa"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_100sdp"
         android:background="@color/category_masa"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:minHeight="@dimen/category_height"
         android:onClick="showMasa"
         android:padding="16dp"
         android:text="@string/masa"
         android:textAppearance="?android:textAppearanceLarge"
         android:textSize="@dimen/text_size" />
-
-    <include
-        layout="@layout/card"
-        android:layout_width="184dp"></include>
 
 </LinearLayout>

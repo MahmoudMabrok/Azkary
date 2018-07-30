@@ -2,15 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/categor_sabah"
     android:clipChildren="false"
     android:orientation="vertical">
 
+
     <link.fls.swipestack.SwipeStack
         android:id="@+id/swipeStackSabah"
-        android:layout_width="320dp"
-        android:layout_height="240dp"
-        android:layout_gravity="center"
-        android:layout_margin="64dp" />
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="25dp"
+        android:layout_weight="0.8"
+        android:gravity="center" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="@dimen/_110sdp"
+        android:layout_height="@dimen/_65sdp"
+        android:onClick="refreshData"
+        android:text="@string/refresh"
+        android:textSize="@dimen/_16ssp" />
 
 
 </LinearLayout>
