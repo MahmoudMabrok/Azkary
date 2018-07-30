@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/category_masa"
     android:clipChildren="false"
+    android:gravity="center"
     android:orientation="vertical">
 
     <link.fls.swipestack.SwipeStack
@@ -12,14 +13,12 @@
         android:layout_height="0dp"
         android:layout_margin="25dp"
         android:layout_weight="0.8"
-        android:gravity="center"
-        android:padding="16dp" />
+        android:gravity="center" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="@dimen/_110sdp"
         android:layout_height="@dimen/_65sdp"
-        android:layout_gravity="center_horizontal|center_vertical"
         android:onClick="refreshData"
         android:text="@string/refresh"
         android:textSize="@dimen/_16ssp" />

@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/categor_sabah"
     android:clipChildren="false"
+    android:gravity="center"
     android:orientation="vertical">
 
 
