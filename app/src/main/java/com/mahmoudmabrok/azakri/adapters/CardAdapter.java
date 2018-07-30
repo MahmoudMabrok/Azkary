@@ -72,53 +72,26 @@ public class CardAdapter extends BaseAdapter {
 
         Spannable spannable = new SpannableString(text2);
 
-        int index, start = 0;
 
-        String REGEX = "";
-        String INPUT = "";
+        String REGEX = "لل";
         Pattern p = Pattern.compile(REGEX);
         //  get a matcher object
-        Matcher m = p.matcher(INPUT);
+        Matcher m = p.matcher(zeker);
+
+        int start, end;
 
         while (m.find()) {
-
-
-        }
-
-
-        for (
-                int i = 0;
-                i < 5; i++)
-
-        {
-
-
-            index = zeker.indexOf("اللّهُ", start);
-            if (index == -1)
-                index = zeker.indexOf("لله", start);
-
-            if (index == -1)
-                index = zeker.indexOf("اللّهُ", start);
-
-
-            if (index >= 0 && (index + 5) <= zeker.length() - 1) {
-                spannable.setSpan(new ForegroundColorSpan(Color.RED), index, index + 5, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                start = index + 1;
-            } else {
-                break;
+            start = m.start();
+            while (zeker.charAt(start) != ' ' && start != 0) {
+                start--;
             }
+            end = m.end();
+            while (zeker.charAt(end) != ' ') {
+                end++;
+            }
+
+            spannable.setSpan(new ForegroundColorSpan(Color.RED), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
-
-
-
-
-        /*//   while(index >= 0 ) {
-
-        spannable.setSpan(new ForegroundColorSpan(Color.WHITE), index, index + 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        start = index++;
-        index = zeker.indexOf("الله", start);
-        //   }
-       */
 
         textView.setText(spannable, TextView.BufferType.SPANNABLE);
         return convertView;
