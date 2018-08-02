@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,8 @@ public class CardAdapter extends BaseAdapter {
     ArrayList<String> mData;
     Context context;
     LayoutInflater mInflater;
+
+    ViewGroup mViewGroup;
 
     public CardAdapter(Context context, ArrayList<String> mData) {
         this.mData = mData;
@@ -52,29 +55,29 @@ public class CardAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
+        mViewGroup = parent;
         convertView = mInflater.inflate(R.layout.card, parent, false);
 
         String zeker = mData.get(position);
-      /*  WebView view = (WebView) convertView.findViewById(R.id.webView);
-        String htmlText = "<html><body style=\"text-align:justify\"> %s </body></Html>";
-        view.loadData(String.format(htmlText, zeker), "text/html", "utf-8");*/
-
 
         TextView textView = (TextView) convertView.findViewById(R.id.textViewCard);
-/*
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            textView.setText(Html.fromHtml("<html><body style=\"text-align:justify\"> " + zeker + " </body></Html>", Html.FROM_HTML_MODE_COMPACT));
-        } else {
-            textView.setText(zeker);
-        }
-*/
-        String text2 = zeker;
 
-        Spannable spannable = new SpannableString(text2);
+        Spannable spannable = getSpannable(zeker);
+
+        textView.setText(spannable, TextView.BufferType.SPANNABLE);
+        return convertView;
+
+    }
+
+    public Spannable getSpannable(String zeker) {
+
+        Spannable spannable = new SpannableString(zeker);
 
 
         String REGEX = "لل";
+        String REGEX2 = "ﷺ";
         Pattern p = Pattern.compile(REGEX);
+        Pattern p2 = Pattern.compile(REGEX2);
         //  get a matcher object
         Matcher m = p.matcher(zeker);
 
@@ -93,9 +96,37 @@ public class CardAdapter extends BaseAdapter {
             spannable.setSpan(new ForegroundColorSpan(Color.RED), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
 
-        textView.setText(spannable, TextView.BufferType.SPANNABLE);
-        return convertView;
+        //another case Span
+        m = p2.matcher(zeker);
+        if (m.find()) {
+            spannable.setSpan(new ForegroundColorSpan(Color.RED), m.start(), m.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+
+        start = zeker.indexOf(')');
+        end = zeker.indexOf('(');
+        if (start >= 0 && end >= 0) {
+            spannable.setSpan(new ForegroundColorSpan(Color.BLUE), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+
+        return spannable;
 
     }
+/*
+
+    public View  getBack(int position ){
+
+        View view  = mInflater.inflate(R.layout.card  , mViewGroup);
+
+        String zeker = mData.get(position-1);
+
+        TextView textView = (TextView) view.findViewById(R.id.textViewCard);
+
+        Spannable spannable = getSpannable(zeker) ;
+
+        textView.setText(spannable, TextView.BufferType.SPANNABLE);
+        return view;
+
+    }
+*/
 
 }
