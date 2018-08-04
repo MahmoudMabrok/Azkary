@@ -47,7 +47,7 @@
             android:layout_margin="@dimen/_12sdp"
             android:background="@color/categor_sabah"
             android:onClick="goNext"
-            android:src="@drawable/ic_menu_next"
+            android:src="@drawable/ic_menu_previous"
             />
     </LinearLayout>
 
