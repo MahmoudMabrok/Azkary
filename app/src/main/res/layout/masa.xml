@@ -37,7 +37,6 @@
             android:background="@drawable/back_button"
             android:onClick="goBack"
             android:src="@drawable/ic_menu_previous"
-            android:text="@string/back"
             android:visibility="invisible" />
 
         <ImageButton
@@ -48,7 +47,7 @@
             android:background="@drawable/back_button"
             android:onClick="goNext"
             android:src="@drawable/ic_menu_next"
-            android:text="@string/back" />
+            />
 
     </LinearLayout>
 </LinearLayout>

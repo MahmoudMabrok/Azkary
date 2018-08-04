@@ -38,7 +38,6 @@
             android:background="@color/categor_sabah"
             android:onClick="goBack"
             android:src="@drawable/ic_menu_previous"
-            android:text="@string/back"
             android:visibility="invisible" />
 
         <ImageButton
@@ -49,7 +48,7 @@
             android:background="@color/categor_sabah"
             android:onClick="goNext"
             android:src="@drawable/ic_menu_next"
-            android:text="@string/back" />
+            />
     </LinearLayout>
 
 

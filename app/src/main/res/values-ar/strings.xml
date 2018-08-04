@@ -6,4 +6,6 @@
     <string name="refresh">أعد الأذكارٌ</string>
     <string name="back">السابق</string>
     <string name="next">التالي</string>
+    <string name="finish">لَقدْ انْهيتَ الأذْكَار </string>
+
 </resources>

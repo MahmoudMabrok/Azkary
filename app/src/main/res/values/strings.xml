@@ -1,10 +1,11 @@
 <resources>
-    <string name="app_name">Azakri</string>
+    <string name="app_name">Azakry</string>
     <string name="sabah">أذكار الصباح </string>
     <string name="masa">اذكار المساء</string>
     <string name="dummy">Ahhhhhhhh</string>
     <string name="refresh">Refresh</string>
     <string name="back">Back</string>
+    <string name="next">next</string>
     <string name="finish">You have Finished Azkar </string>
 
 </resources>

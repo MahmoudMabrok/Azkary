@@ -38,15 +38,12 @@ public class Sabah extends Activity {
         swipeStack.setListener(new SwipeStack.SwipeStackListener() {
             @Override
             public void onViewSwipedToLeft(int position) {
-                Toast.makeText(Sabah.this, "" + position, Toast.LENGTH_SHORT).show();
-                latestItem = position;
+
             }
 
             @Override
             public void onViewSwipedToRight(int position) {
-                Toast.makeText(Sabah.this, "" + position, Toast.LENGTH_SHORT).show();
-                latestItem = position;
-            }
+               }
 
 
             @Override
@@ -62,7 +59,7 @@ public class Sabah extends Activity {
     public void refreshData(View view) {
 
         swipeStack.resetStack();
-        latestItem = -1;
+       /* latestItem = -1;*/
     }
 
     public void goBack(View view) {
@@ -80,13 +77,13 @@ public class Sabah extends Activity {
 
             }
 */
-
+/*
         mDate.clear();
         mCardAdapter.notifyDataSetChanged();
 
         mDate.add("Ahh");
         mCardAdapter.notifyDataSetChanged();
-        
+      */
     }
 
     public void goNext(View view) {
