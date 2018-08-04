@@ -80,6 +80,13 @@ public class Sabah extends Activity {
 
             }
 */
+
+        mDate.clear();
+        mCardAdapter.notifyDataSetChanged();
+
+        mDate.add("Ahh");
+        mCardAdapter.notifyDataSetChanged();
+        
     }
 
     public void goNext(View view) {

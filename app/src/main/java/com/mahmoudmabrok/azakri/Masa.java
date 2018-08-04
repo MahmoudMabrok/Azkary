@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.Toast;
 
 import com.mahmoudmabrok.azakri.adapters.CardAdapter;
 
@@ -35,10 +36,34 @@ public class Masa extends Activity {
         swipeStack = (SwipeStack) findViewById(R.id.swipeStack);
         swipeStack.setAdapter(mCardAdapter);
 
+        swipeStack.setListener(new SwipeStack.SwipeStackListener() {
+            @Override
+            public void onViewSwipedToLeft(int position) {
+
+            }
+
+            @Override
+            public void onViewSwipedToRight(int position) {
+
+            }
+
+
+            @Override
+            public void onStackEmpty() {
+                Toast.makeText(Masa.this, getString(R.string.finish), Toast.LENGTH_LONG).show();
+            }
+
+        });
+
+
     }
 
 
     public void refreshData(View view) {
         swipeStack.resetStack();
+    }
+
+    public void goNext(View view) {
+        swipeStack.swipeTopViewToLeft();
     }
 }

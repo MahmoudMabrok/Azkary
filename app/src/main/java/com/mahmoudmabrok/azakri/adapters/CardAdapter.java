@@ -102,31 +102,15 @@ public class CardAdapter extends BaseAdapter {
             spannable.setSpan(new ForegroundColorSpan(Color.RED), m.start(), m.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
 
-        start = zeker.indexOf(')');
-        end = zeker.indexOf('(');
+        start = zeker.indexOf('(');
+        end = zeker.indexOf(')');
         if (start >= 0 && end >= 0) {
-            spannable.setSpan(new ForegroundColorSpan(Color.BLUE), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spannable.setSpan(new ForegroundColorSpan(Color.BLUE), start + 1, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
 
         return spannable;
 
     }
-/*
 
-    public View  getBack(int position ){
-
-        View view  = mInflater.inflate(R.layout.card  , mViewGroup);
-
-        String zeker = mData.get(position-1);
-
-        TextView textView = (TextView) view.findViewById(R.id.textViewCard);
-
-        Spannable spannable = getSpannable(zeker) ;
-
-        textView.setText(spannable, TextView.BufferType.SPANNABLE);
-        return view;
-
-    }
-*/
 
 }
