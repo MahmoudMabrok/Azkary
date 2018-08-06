@@ -7,5 +7,6 @@
     <string name="back">Back</string>
     <string name="next">next</string>
     <string name="finish">You have Finished Azkar </string>
+    <string name="count_is">Count is ::</string>
 
 </resources>

@@ -7,5 +7,6 @@
     <string name="back">السابق</string>
     <string name="next">التالي</string>
     <string name="finish">لَقدْ انْهيتَ الأذْكَار </string>
+    <string name="count_is">Count is ::</string>
 
 </resources>

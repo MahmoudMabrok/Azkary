@@ -6,13 +6,42 @@
     card_view:cardCornerRadius="@dimen/card_corner_radius"
     card_view:cardElevation="@dimen/elevation_large">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tvZekerOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/_9sdp"
+            android:text="16"
+            android:textSize="@dimen/_18ssp"
+            android:visibility="gone" />
+
         <TextView
             android:id="@+id/textViewCard"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:gravity="center"
-            android:padding="@dimen/_16sdp"
+            android:padding="@dimen/_10sdp"
             android:text="الله أكبر"
             android:textSize="@dimen/_25ssp" />
+
+        <TextView
+            android:id="@+id/tvZekerCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:padding="@dimen/_10sdp"
+            android:text="@string/count_is"
+            android:textDirection="ltr"
+            android:textSize="@dimen/_20sdp" />
+
+    </LinearLayout>
 
 </android.support.v7.widget.CardView>
