@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Toast;
 
+import com.mahmoudmabrok.azakri.DataSet.Data;
 import com.mahmoudmabrok.azakri.adapters.CardAdapter;
 
 import java.util.ArrayList;
@@ -17,9 +18,9 @@ import link.fls.swipestack.SwipeStack;
  */
 
 
-public class Masa extends Activity {
+public class Masa extends Activity implements CardAdapter.ZekerItemClicker {
 
-    private ArrayList<String> mDate;
+    private ArrayList<Zeker> mDate;
     private CardAdapter mCardAdapter;
     private SwipeStack swipeStack;
 
@@ -32,7 +33,7 @@ public class Masa extends Activity {
         Data data = new Data();
         mDate = data.getMasa();
 
-        mCardAdapter = new CardAdapter(this, mDate);
+        mCardAdapter = new CardAdapter(this, mDate, this);
         swipeStack = (SwipeStack) findViewById(R.id.swipeStack);
         swipeStack.setAdapter(mCardAdapter);
 
@@ -52,12 +53,8 @@ public class Masa extends Activity {
             public void onStackEmpty() {
                 Toast.makeText(Masa.this, getString(R.string.finish), Toast.LENGTH_LONG).show();
             }
-
         });
-
-
     }
-
 
     public void refreshData(View view) {
         swipeStack.resetStack();
@@ -66,4 +63,11 @@ public class Masa extends Activity {
     public void goNext(View view) {
         swipeStack.swipeTopViewToLeft();
     }
+
+    //region onClick Swip Card
+    @Override
+    public void onClick(int index) {
+        Toast.makeText(this, "sasasasa", Toast.LENGTH_SHORT).show();
+    }
+    //endregion
 }

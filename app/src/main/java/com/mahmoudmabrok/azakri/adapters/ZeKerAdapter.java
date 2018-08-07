@@ -27,7 +27,7 @@ public class ZeKerAdapter extends ArrayAdapter<String> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        ViewHolder holder;  //holder to facilitate bind Data
+        ViewHolder holder;  //holder to facilitate bind DataSet
 
         if (convertView == null) {
             LayoutInflater layoutInflater = LayoutInflater.from(getContext());
