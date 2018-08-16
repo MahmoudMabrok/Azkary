@@ -29,7 +29,8 @@
             android:padding="@dimen/_20sdp"
 
             android:textDirection="ltr"
-            android:textSize="@dimen/_20ssp" />
+            android:textSize="@dimen/_20ssp"
+            android:visibility="gone" />
 
     </LinearLayout>
 

@@ -5,13 +5,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mahmoudmabrok.azakri.DataLayer.DataRepository;
 import com.mahmoudmabrok.azakri.DataSet.Data;
 import com.mahmoudmabrok.azakri.adapters.CardAdapter;
 
 import java.util.ArrayList;
 
+import butterknife.BindString;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import link.fls.swipestack.SwipeStack;
 
 /**
@@ -20,16 +27,32 @@ import link.fls.swipestack.SwipeStack;
 
 public class Sabah extends Activity implements CardAdapter.ZekerItemClicker {
 
-    int latestItem = -1;
     int count;
+
+    @BindView(R.id.swipeStackSabah)
+    SwipeStack swipeStackSabah;
+    @BindView(R.id.button)
+    ImageButton button;
+    @BindView(R.id.btnBack)
+    ImageButton btnBack;
+
+    @BindView(R.id.tvCount)
+    TextView tvCount;
+
+    @BindString(R.string.finish)
+    String finishText;
+
     private ArrayList<Zeker> mDate;
     private CardAdapter mCardAdapter;
-    private SwipeStack swipeStack;
+    private DataRepository dataRepository;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sabah);
+        ButterKnife.bind(this);
+
+        dataRepository = ((App) getApplication()).getDataRepository();
 
         //region DataSet
         final Data data = new Data();
@@ -38,33 +61,42 @@ public class Sabah extends Activity implements CardAdapter.ZekerItemClicker {
 
         //region swip Maker
         mCardAdapter = new CardAdapter(this, mDate, this);
-        swipeStack = (SwipeStack) findViewById(R.id.swipeStackSabah);
-
-        swipeStack.setAdapter(mCardAdapter);
+        swipeStackSabah.setAdapter(mCardAdapter);
         //endregion
 
         //region swip Listner
-        swipeStack.setListener(new SwipeStack.SwipeStackListener() {
+        swipeStackSabah.setListener(new SwipeStack.SwipeStackListener() {
             @Override
             public void onViewSwipedToLeft(int position) {
-                count = mDate.get(position).getCount();
+                if (position <= mDate.size() - 2) {
+                    count = mDate.get(position + 1).getCount();
+                    setTvCountText(count);
+                }
             }
 
             @Override
             public void onViewSwipedToRight(int position) {
-                count = mDate.get(position).getCount();
+                if (position <= mDate.size() - 2) {
+                    count = mDate.get(position + 1).getCount();
+                    setTvCountText(count);
+                }
             }
 
             @Override
             public void onStackEmpty() {
-                Toast.makeText(Sabah.this, getString(R.string.finish), Toast.LENGTH_SHORT).show();
+                Toast.makeText(Sabah.this, finishText, Toast.LENGTH_SHORT).show();
+                //region go to Main
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(700);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
+                dataRepository.addSabah();
                 Intent intent = new Intent(Sabah.this, MainActivity.class);
                 startActivity(intent);
+                finish();
+                //endregion
             }
 
         });
@@ -73,13 +105,23 @@ public class Sabah extends Activity implements CardAdapter.ZekerItemClicker {
 
     }
 
+/*
     public void refreshData(View view) {
 
-        swipeStack.resetStack();
+        swipeStackSabah.resetStack();
+    }
+*/
+
+    public void setTvCountText(String text) {
+        tvCount.setText(text);
+    }
+
+    public void setTvCountText(int number) {
+        tvCount.setText(String.valueOf(number));
     }
 
     public void goNext(View view) {
-        swipeStack.swipeTopViewToLeft();
+        swipeStackSabah.swipeTopViewToLeft();
     }
 
     @Override
@@ -87,6 +129,22 @@ public class Sabah extends Activity implements CardAdapter.ZekerItemClicker {
       /*  int value = Integer.parseInt()*/ // TODO: 8/7/2018 implement in adapter
     }
 
+    @OnClick(R.id.button)
+    public void onButtonClicked() {
+        swipeStackSabah.resetStack();
+        count = 1;
+        setTvCountText(count);
+    }
+
+    @OnClick(R.id.tvCount)
+    public void onTvCountClicked() {
+        count--;
+        if (count <= 0) {
+            swipeStackSabah.swipeTopViewToLeft();
+        } else {
+            setTvCountText(count);
+        }
+    }
 }
 
 

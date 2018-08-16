@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">أذكار المسلم</string>
     <string name="sabah">أذكار الصباح </string>
     <string name="masa">اذكار المساء</string>
@@ -8,5 +9,9 @@
     <string name="next">التالي</string>
     <string name="finish">لَقدْ انْهيتَ الأذْكَار </string>
     <string name="count_is">Count is ::</string>
+    <string name="exit_message"> سبحانَ الله وبحمده،سبحانَكَ اللهمَّ و بحمدك،أشهد أن لا إأله إلا أنتَ،أستغفرك،وأتوبُ إليك   </string>
+    <string name="exit_ok">غلق</string>
+    <string name="exit_no">ابقي</string>
+    <string name="exit_title">كفارة المجلس </string>
 
 </resources>
