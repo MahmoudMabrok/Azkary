@@ -20,14 +20,6 @@ public class ZekerReceiver extends BroadcastReceiver {
 
         Log.d(TAG, "onReceive: ");
 
-        /*int type = intent.getIntExtra("type" , -1 ) ;
-        if (type == 0 ){
-
-        }else  if (type == 1 ){
-
-        }*/
-
-
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         int id = (int) (Math.random() * 2222);
