@@ -1,10 +1,11 @@
 package com.mahmoudmabrok.azakri;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
@@ -18,6 +19,9 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mahmoudmabrok.azakri.DataLayer.DataRepository;
 import com.tjeannin.apprate.AppRate;
+
+import java.util.Calendar;
+import java.util.TimeZone;
 
 import butterknife.BindString;
 import butterknife.BindView;
@@ -38,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     private DataRepository dataRepository;
 
+
+    PendingIntent pendingIntent;
+    AlarmManager alarmManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,11 +58,36 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
+        //AppRate in OnCreate of Activity u want to show in
         new AppRate(this)
                 .setMinDaysUntilPrompt(5)
                 .setMinLaunchesUntilPrompt(10)
                 .setShowIfAppHasCrashed(false)
                 .init();
+
+    }
+
+    private void makeAlarm() {
+
+        //   Intent intent = new Intent(this , AzjarService.class);
+
+     /*   pendingIntent = PendingIntent.getService(this , 0 ,
+                                        intent ,PendingIntent.FLAG_UPDATE_CURRENT);
+*/
+
+        Intent intent = new Intent(this, ZekerReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(this, 0,
+                intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
+        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+        calendar.set(Calendar.HOUR_OF_DAY, 4);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MINUTE, 0);
+
+
+        alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60, pendingIntent);
 
 
     }
@@ -70,10 +103,12 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_send_feedback:
-                showToast(this, "Ahhhhh");
+                Toast.makeText(this, "" + dataRepository.getSabahCount(), Toast.LENGTH_SHORT).show();
+                alarmManager.cancel(pendingIntent);
                 break;
             case R.id.action_setting:
-                showToast(this, "Lahhhhh", 1);
+                makeAlarm();
+                showToast(this, "" + dataRepository.getMasaCount(), 1);
                 break;
         }
 
@@ -83,12 +118,14 @@ public class MainActivity extends AppCompatActivity {
     public void showSabah(View view) {
         Intent i = new Intent(this, Sabah.class);
         startActivity(i);
+
     }
 
     public void showMasa(View view) {
         Intent i = new Intent(this, Masa.class);
         startActivity(i);
     }
+
 
     @Override
     public void onBackPressed() {
@@ -97,7 +134,11 @@ public class MainActivity extends AppCompatActivity {
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        MainActivity.super.onBackPressed();
+                      /*  MainActivity.this.finishAffinity(); //claose all current stack activity
+                        System.exit(0); // free up all resources
+                   */
+                        finish();
+
                     }
                 })
                 /*   .negativeText(exitNegative)

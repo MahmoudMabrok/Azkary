@@ -112,6 +112,12 @@ public class Sabah extends Activity implements CardAdapter.ZekerItemClicker {
     }
 */
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
     public void setTvCountText(String text) {
         tvCount.setText(text);
     }

@@ -1,7 +1,6 @@
 package com.mahmoudmabrok.azakri.DataLayer;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 
 import com.mahmoudmabrok.azakri.DataLayer.LocalData.PrefHelper;
 
@@ -20,5 +19,14 @@ public class DataRepository {
     public void addSabah() {
         mPref.addSabah();
     }
+
+    public int getSabahCount() {
+        return mPref.getSabahCount();
+    }
+
+    public int getMasaCount() {
+        return mPref.getMasaCount();
+    }
+
 
 }

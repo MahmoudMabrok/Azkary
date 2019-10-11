@@ -28,7 +28,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/categor_sabah"
-            android:src="@drawable/converter" />
+            android:src="@drawable/converter"
+            android:visibility="gone" />
 
         <ImageButton
             android:id="@+id/btnBack"
@@ -37,18 +38,18 @@
             android:background="@color/categor_sabah"
             android:onClick="goBack"
             android:src="@drawable/ic_menu_previous"
-            android:visibility="invisible" />
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/tvCount"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_25sdp"
+            android:layout_marginEnd="@dimen/_25sdp"
             android:background="@drawable/back_button"
             android:gravity="center"
             android:onClick="goNext"
             android:padding="@dimen/_10sdp"
-            android:src="@drawable/ic_menu_previous"
             android:text="1"
             android:textSize="@dimen/_30ssp" />
     </LinearLayout>
