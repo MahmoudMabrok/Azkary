@@ -9,8 +9,8 @@ import android.os.Build;
 import android.util.Log;
 
 import com.mahmoudmabrok.azakri.BuildConfig;
-import com.mahmoudmabrok.azakri.MainActivity;
 import com.mahmoudmabrok.azakri.R;
+import com.mahmoudmabrok.azakri.feature.home.MainActivity;
 
 import static android.os.Build.VERSION_CODES.O;
 

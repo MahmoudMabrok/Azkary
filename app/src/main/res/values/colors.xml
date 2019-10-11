@@ -13,5 +13,8 @@
     <color name="list_back">#f7b42f</color>
     <color name="black">#262625</color>
     <color name="red">#ff0000</color>
+    <color name="bgTimes">#1050fa</color>
+    <color name="timesColor">#ffffff</color>
+    <color name="displayBG">#DAD7D7</color>
 
 </resources>

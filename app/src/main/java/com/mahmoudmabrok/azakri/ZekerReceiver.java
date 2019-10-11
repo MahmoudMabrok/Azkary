@@ -49,7 +49,6 @@ public class ZekerReceiver extends BroadcastReceiver {
                     .build();
 
             notificationManager.notify(id, notification);
-
         }
     }
 }

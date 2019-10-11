@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.mahmoudmabrok.azakri.R;
+import com.mahmoudmabrok.azakri.Zeker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,8 +54,8 @@ public class ZekerAdapter extends RecyclerView.Adapter<ZekerAdapter.Holder> {
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int i) {
         Zeker item = list.get(i);
-        holder.mTvTimes.setText(String.valueOf(item.getTimes()));
-        holder.mTvZeker.setText(item.getText());
+        holder.mTvTimes.setText(String.valueOf(item.getCount()));
+        holder.mTvZeker.setText(item.getName());
     }
 
     @Override
@@ -62,7 +63,7 @@ public class ZekerAdapter extends RecyclerView.Adapter<ZekerAdapter.Holder> {
         return list.size();
     }
 
-    class Holder extends RecyclerView.ViewHolder {
+    class Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @BindView(R.id.tvZeker)
         TextView mTvZeker;
@@ -72,6 +73,24 @@ public class ZekerAdapter extends RecyclerView.Adapter<ZekerAdapter.Holder> {
         public Holder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int pos = getAdapterPosition();
+            com.mahmoudmabrok.azakri.Zeker zeker = list.get(pos);
+            int count = zeker.getCount();
+            if (count == 1) {
+                list.remove(pos);
+                notifyItemRemoved(pos);
+                notifyItemRangeRemoved(pos, 1);
+            } else {
+                zeker.setCount(--count);
+                list.set(pos, zeker);
+                notifyItemChanged(pos);
+                //  notifyItemRangeChanged(pos,1);
+            }
         }
     }
 

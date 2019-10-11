@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 public class Data {
 
-
     private ArrayList<Zeker> sabah = new ArrayList<>();
     private ArrayList<Zeker> masa = new ArrayList<>();
 

@@ -1,4 +1,4 @@
-package com.mahmoudmabrok.azakri;
+package com.mahmoudmabrok.azakri.feature.home;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -9,12 +9,19 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.mahmoudmabrok.azakri.App;
 import com.mahmoudmabrok.azakri.DataLayer.DataRepository;
+import com.mahmoudmabrok.azakri.R;
+import com.mahmoudmabrok.azakri.Util.Constants;
+import com.mahmoudmabrok.azakri.ZekerReceiver;
+import com.mahmoudmabrok.azakri.feature.display.DisplayAzkar;
 import com.tjeannin.apprate.AppRate;
 
 import java.util.Calendar;
@@ -22,10 +29,10 @@ import java.util.TimeZone;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,10 +45,12 @@ public class MainActivity extends AppCompatActivity {
     String exitTitle;
     @BindString(R.string.exit_message)
     String exitMessage;
-    @BindView(R.id.my_toolbar)
-    Toolbar toolbar;
-    private DataRepository dataRepository;
+    @BindView(R.id.sabah)
+    Button mSabah;
+    @BindView(R.id.masa)
+    Button mMasa;
 
+    private DataRepository dataRepository;
 
     PendingIntent pendingIntent;
     AlarmManager alarmManager;
@@ -53,10 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-
         dataRepository = ((App) getApplication()).getDataRepository();
-        setSupportActionBar(toolbar);
-
 
         //AppRate in OnCreate of Activity u want to show in
         new AppRate(this)
@@ -68,12 +74,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void makeAlarm() {
-
-        //   Intent intent = new Intent(this , AzjarService.class);
-
-     /*   pendingIntent = PendingIntent.getService(this , 0 ,
-                                        intent ,PendingIntent.FLAG_UPDATE_CURRENT);
-*/
 
         Intent intent = new Intent(this, ZekerReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(this, 0,
@@ -87,7 +87,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60, pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+                calendar.getTimeInMillis(), 1000 * 60, pendingIntent);
 
 
     }
@@ -113,17 +114,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void showSabah(View view) {
-        Intent i = new Intent(this, Sabah.class);
-        startActivity(i);
-
-    }
-
-    public void showMasa(View view) {
-        Intent i = new Intent(this, Masa.class);
-        startActivity(i);
     }
 
 
@@ -153,23 +143,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 /*
-        DialogeMaker.makeDialog(this, exitMessage, exitPostivitive, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Toast.makeText(MainActivity.this, "stay", Toast.LENGTH_SHORT).show();
-            }
-        }, exitNegative, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Toast.makeText(MainActivity.this, "Bye", Toast.LENGTH_SHORT).show();
-            }
-        }).show();
-*/
-/*
         DialogeMaker.makeDialog(MainActivity.this , exitTitle , exitMessage).show();
         */
 /*
-
    new  AlertDialog.Builder(MainActivity.this).setTitle(exitTitle).setMessage(exitMessage).create().show();
 */
 
@@ -180,7 +156,6 @@ public class MainActivity extends AppCompatActivity {
         Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
         toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 0);
         toast.show();
-
     }
 
     public void showToast(Context context, String text, int x) {
@@ -191,5 +166,42 @@ public class MainActivity extends AppCompatActivity {
         toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, x, 200);
         toast.show();
 
+    }
+
+    @OnClick(R.id.sabah)
+    public void onMSabahClicked() {
+        openDisplay(Constants.SABAH);
+    }
+
+    @OnClick(R.id.masa)
+    public void onMMasaClicked() {
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0.1F, 0.7F);
+        alphaAnimation.setDuration(1000);
+        mMasa.startAnimation(alphaAnimation);
+        mMasa.getAnimation().setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                openDisplay(Constants.MASA);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+
+    }
+
+
+    private void openDisplay(String zekerType) {
+        Intent openAcivity = new Intent(MainActivity.this, DisplayAzkar.class);
+        openAcivity.putExtra(Constants.ZEKER_TYPE, zekerType);
+        startActivity(openAcivity);
     }
 }
