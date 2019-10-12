@@ -29,4 +29,21 @@ public class DataRepository {
     }
 
 
+    public void addLastPosSabah(int pos) {
+        mPref.addLastPosSabah(pos);
+    }
+
+    public int getLastPosSabah() {
+        return mPref.getLastPosSabah();
+    }
+
+    public void addLastPosMasa(int pos) {
+        mPref.addLastPosMasa(pos);
+    }
+
+    public int getLastPosMasa() {
+        return mPref.getLastPosMasa();
+    }
+
+
 }

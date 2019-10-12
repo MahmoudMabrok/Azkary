@@ -48,5 +48,23 @@ public class PrefHelper {
         sharedPreferences.edit().putInt(Constants.masa_pref_key, count).apply();
     }
 
+    public void addLastPosSabah(int pos) {
+        sharedPreferences.edit().putInt(Constants.LAST_POS_SABAH, pos);
+    }
+
+    public int getLastPosSabah() {
+        return sharedPreferences.getInt(Constants.LAST_POS_SABAH, 0);
+    }
+
+    public void addLastPosMasa(int pos) {
+        sharedPreferences.edit().putInt(Constants.LAST_POS_MASA, pos);
+    }
+
+    public int getLastPosMasa() {
+        return sharedPreferences.getInt(Constants.LAST_POS_MASA, 0);
+    }
+
+
+
 
 }

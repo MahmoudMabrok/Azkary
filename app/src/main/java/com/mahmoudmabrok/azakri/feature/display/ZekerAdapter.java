@@ -1,5 +1,6 @@
 package com.mahmoudmabrok.azakri.feature.display;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +20,11 @@ import butterknife.ButterKnife;
 public class ZekerAdapter extends RecyclerView.Adapter<ZekerAdapter.Holder> {
 
     private List<Zeker> list;
+    private ZekerStateListner zekerStateListner;
 
-    public ZekerAdapter() {
+    public ZekerAdapter(Context context) {
         list = new ArrayList<>();
+        zekerStateListner = (ZekerStateListner) context;
     }
 
     public void addZeker(Zeker item) {
@@ -63,6 +66,12 @@ public class ZekerAdapter extends RecyclerView.Adapter<ZekerAdapter.Holder> {
         return list.size();
     }
 
+    interface ZekerStateListner {
+        void onFinish();
+
+        void onDisplayed(int pos);
+    }
+
     class Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @BindView(R.id.tvZeker)
@@ -78,18 +87,26 @@ public class ZekerAdapter extends RecyclerView.Adapter<ZekerAdapter.Holder> {
 
         @Override
         public void onClick(View v) {
-            int pos = getAdapterPosition();
-            com.mahmoudmabrok.azakri.Zeker zeker = list.get(pos);
-            int count = zeker.getCount();
-            if (count == 1) {
-                list.remove(pos);
-                notifyItemRemoved(pos);
-                notifyItemRangeRemoved(pos, 1);
-            } else {
-                zeker.setCount(--count);
-                list.set(pos, zeker);
-                notifyItemChanged(pos);
-                //  notifyItemRangeChanged(pos,1);
+            try {
+                int pos = getAdapterPosition();
+                Zeker zeker = list.get(pos);
+                int count = zeker.getCount();
+                if (count == 1) {
+                    list.remove(pos);
+                    notifyItemRemoved(pos);
+                    notifyItemRangeRemoved(pos, list.size());
+                    // check if it become empty
+                    if (list.size() == 0) {
+                        zekerStateListner.onFinish();
+                    }
+                } else {
+                    zeker.setCount(--count);
+                    list.set(pos, zeker);
+                    notifyItemChanged(pos);
+                    zekerStateListner.onDisplayed(pos);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }

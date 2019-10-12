@@ -43,6 +43,7 @@ dependencies {
     implementation 'com.jakewharton:butterknife:10.1.0'
     annotationProcessor "com.jakewharton:butterknife-compiler:10.1.0"
 
+    implementation 'com.balsikandar.android:crashreporter:1.0.9'
 
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
 

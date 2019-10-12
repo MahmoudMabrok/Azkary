@@ -68,8 +68,9 @@ public class MainActivity extends AppCompatActivity {
         new AppRate(this)
                 .setMinDaysUntilPrompt(5)
                 .setMinLaunchesUntilPrompt(10)
-                .setShowIfAppHasCrashed(false)
+                .setShowIfAppHasCrashed(true)
                 .init();
+
 
     }
 
@@ -105,10 +106,10 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_send_feedback:
                 Toast.makeText(this, "" + dataRepository.getSabahCount(), Toast.LENGTH_SHORT).show();
-                alarmManager.cancel(pendingIntent);
+                // alarmManager.cancel(pendingIntent);
                 break;
             case R.id.action_setting:
-                makeAlarm();
+                // makeAlarm();
                 showToast(this, "" + dataRepository.getMasaCount(), 1);
                 break;
         }
@@ -170,7 +171,27 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.sabah)
     public void onMSabahClicked() {
-        openDisplay(Constants.SABAH);
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0.1F, 0.7F);
+        alphaAnimation.setDuration(1000);
+        mSabah.startAnimation(alphaAnimation);
+        mSabah.getAnimation().setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                openDisplay(Constants.SABAH);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+
     }
 
     @OnClick(R.id.masa)
@@ -204,4 +225,11 @@ public class MainActivity extends AppCompatActivity {
         openAcivity.putExtra(Constants.ZEKER_TYPE, zekerType);
         startActivity(openAcivity);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // overridePendingTransition(android.R.anim.fade_out,android.R.anim.fade_in);
+    }
+
 }

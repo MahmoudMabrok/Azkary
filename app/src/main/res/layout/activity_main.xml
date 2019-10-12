@@ -1,39 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:layoutDirection="rtl"
+    android:background="@mipmap/bg"
     android:orientation="vertical"
+    android:layoutDirection="ltr"
     tools:context="com.mahmoudmabrok.azakri.feature.home.MainActivity">
 
     <Button
         android:id="@+id/sabah"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_100sdp"
-        android:layout_marginBottom="@dimen/_50sdp"
-        android:background="@drawable/back_button"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="@dimen/_40sdp"
+        android:layout_marginBottom="@dimen/_80sdp"
+        android:background="@drawable/sabahbg"
+        android:textAppearance="?android:textAppearanceLarge"
         android:drawableEnd="@drawable/ic_isun"
         android:drawablePadding="@dimen/_5sdp"
-        android:gravity="center"
         android:minHeight="@dimen/category_height"
         android:padding="16dp"
         android:text="@string/sabah"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Widget.Button" />
+        android:textColor="@color/sabahtvColor" />
 
     <Button
-            android:id="@+id/masa"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_100sdp"
-            android:background="@drawable/back_button"
-            android:gravity="center"
-            android:minHeight="@dimen/category_height"
+        android:id="@+id/masa"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_100sdp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_80sdp"
+        android:background="@drawable/masabg"
         android:drawableEnd="@drawable/ic_night"
         android:drawablePadding="@dimen/_5sdp"
-            android:padding="16dp"
-            android:text="@string/masa"
-            android:textAppearance="?android:textAppearanceLarge"
-            android:textSize="@dimen/text_size" />
+        android:minHeight="@dimen/category_height"
+        android:padding="16dp"
+        android:text="@string/masa"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textColor="@color/masatvColor"
+        android:textSize="@dimen/text_size" />
 
-</LinearLayout>
+</RelativeLayout>

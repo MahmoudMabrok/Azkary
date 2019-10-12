@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#929292</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="categor_sabah">#39f7e1</color>
@@ -16,5 +16,19 @@
     <color name="bgTimes">#1050fa</color>
     <color name="timesColor">#ffffff</color>
     <color name="displayBG">#DAD7D7</color>
+
+    <!--<color name="masabg">#FCF8F8</color>
+    <color name="masatvColor">#272626</color>
+
+    <color name="sabahbg">#535151</color>
+    <color name="sabahtvColor">#F7F5F5</color>
+    -->
+
+
+    <color name="masabg">#535151</color>
+    <color name="masatvColor">#F7F5F5</color>
+
+    <color name="sabahbg">#FCF8F8</color>
+    <color name="sabahtvColor">#272626</color>
 
 </resources>
