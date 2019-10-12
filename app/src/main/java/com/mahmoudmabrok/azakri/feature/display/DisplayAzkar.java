@@ -3,6 +3,7 @@ package com.mahmoudmabrok.azakri.feature.display;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 
 import com.mahmoudmabrok.azakri.App;
 import com.mahmoudmabrok.azakri.DataLayer.DataRepository;
@@ -29,6 +30,8 @@ public class DisplayAzkar extends Activity implements ZekerAdapter.ZekerStateLis
     private boolean isSabah;
 
 
+    private static final String TAG = "DisplayAzkar";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +48,18 @@ public class DisplayAzkar extends Activity implements ZekerAdapter.ZekerStateLis
 
         }
         initRv();
+        scrollRvToLastPos();
+    }
+
+    public void scrollRvToLastPos() {
+        int pos;
+        if (isSabah) {
+            pos = dataRepository.getLastPosSabah();
+        } else {
+            pos = dataRepository.getLastPosMasa();
+        }
+        Log.d(TAG, "scrollRvToLastPos: " + pos);
+        mRvDisplay.scrollToPosition(pos);
     }
 
     @Override
@@ -55,7 +70,7 @@ public class DisplayAzkar extends Activity implements ZekerAdapter.ZekerStateLis
 
     private void initRv() {
         ZekerAdapter adapter = new ZekerAdapter(this);
-        adapter.setZekerList(zekerList.subList(0, 2));
+        adapter.setZekerList(zekerList);
         mRvDisplay.setAdapter(adapter);
         mRvDisplay.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -63,7 +78,12 @@ public class DisplayAzkar extends Activity implements ZekerAdapter.ZekerStateLis
     @Override
     public void onFinish() {
         lastClicked = 0;
-        new CountDownTimer(1000, 1000) {
+        if (isSabah) {
+            dataRepository.addSabah();
+        } else {
+            dataRepository.addMasa();
+        }
+        new CountDownTimer(500, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
 
@@ -80,6 +100,7 @@ public class DisplayAzkar extends Activity implements ZekerAdapter.ZekerStateLis
     @Override
     public void onDisplayed(int pos) {
         lastClicked = pos;
+        Log.d(TAG, "onDisplayed: " + pos);
     }
 
     @Override
@@ -89,5 +110,6 @@ public class DisplayAzkar extends Activity implements ZekerAdapter.ZekerStateLis
             dataRepository.addLastPosSabah(lastClicked);
         } else
             dataRepository.addLastPosMasa(lastClicked);
+        Log.d(TAG, "onStop: " + lastClicked);
     }
 }

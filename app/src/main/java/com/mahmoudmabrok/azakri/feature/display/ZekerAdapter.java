@@ -20,6 +20,7 @@ import butterknife.ButterKnife;
 public class ZekerAdapter extends RecyclerView.Adapter<ZekerAdapter.Holder> {
 
     private List<Zeker> list;
+    private List<Zeker> tempList = new ArrayList<>();
     private ZekerStateListner zekerStateListner;
 
     public ZekerAdapter(Context context) {
@@ -36,6 +37,7 @@ public class ZekerAdapter extends RecyclerView.Adapter<ZekerAdapter.Holder> {
 
     public void setZekerList(List<Zeker> data) {
         list = new ArrayList<>(data);
+        tempList = new ArrayList<>(data);
     }
 
     public void clear() {
@@ -66,9 +68,9 @@ public class ZekerAdapter extends RecyclerView.Adapter<ZekerAdapter.Holder> {
         return list.size();
     }
 
+
     interface ZekerStateListner {
         void onFinish();
-
         void onDisplayed(int pos);
     }
 
@@ -91,19 +93,23 @@ public class ZekerAdapter extends RecyclerView.Adapter<ZekerAdapter.Holder> {
                 int pos = getAdapterPosition();
                 Zeker zeker = list.get(pos);
                 int count = zeker.getCount();
+                int originalPos = tempList.indexOf(zeker);
                 if (count == 1) {
                     list.remove(pos);
                     notifyItemRemoved(pos);
                     notifyItemRangeRemoved(pos, list.size());
+                    zekerStateListner.onDisplayed(originalPos + 1);
                     // check if it become empty
                     if (list.size() == 0) {
                         zekerStateListner.onFinish();
+                        // to scroll to first item
+                        zekerStateListner.onDisplayed(0);
                     }
                 } else {
                     zeker.setCount(--count);
                     list.set(pos, zeker);
                     notifyItemChanged(pos);
-                    zekerStateListner.onDisplayed(pos);
+                    zekerStateListner.onDisplayed(originalPos);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
