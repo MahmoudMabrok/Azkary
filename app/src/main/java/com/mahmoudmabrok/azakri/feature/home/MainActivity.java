@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 .setShowIfAppHasCrashed(true)
                 .init();
 
+        makeAlarm();
 
     }
 
@@ -80,16 +81,25 @@ public class MainActivity extends AppCompatActivity {
         pendingIntent = PendingIntent.getBroadcast(this, 0,
                 intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-
+        int nHour = 1;
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
-        calendar.set(Calendar.HOUR_OF_DAY, 4);
+        calendar.set(Calendar.HOUR_OF_DAY, 17);
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MINUTE, 0);
 
+        alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+                calendar.getTimeInMillis(), 1000 * 60 * 60 * nHour, pendingIntent);
+
+
+        calendar = Calendar.getInstance(TimeZone.getDefault());
+        calendar.set(Calendar.HOUR_OF_DAY, 5);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MINUTE, 0);
 
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-                calendar.getTimeInMillis(), 1000 * 60, pendingIntent);
+                calendar.getTimeInMillis(), 1000 * 60 * 60 * nHour, pendingIntent);
 
 
     }
@@ -226,10 +236,5 @@ public class MainActivity extends AppCompatActivity {
         startActivity(openAcivity);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        // overridePendingTransition(android.R.anim.fade_out,android.R.anim.fade_in);
-    }
 
 }

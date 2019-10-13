@@ -4,6 +4,7 @@ import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
@@ -30,6 +31,9 @@ public class AzjarService extends IntentService {
 
         Intent mainINtent = new Intent(AzjarService.this, MainActivity.class);
 
+        PendingIntent pendingIntent = PendingIntent.getActivities(AzjarService.this,
+                1000, new Intent[]{mainINtent}, PendingIntent.FLAG_UPDATE_CURRENT);
+        
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         int id = 11;
@@ -41,6 +45,7 @@ public class AzjarService extends IntentService {
 
             Notification notification = new Notification.Builder(getApplicationContext(), "nn")
                     .setAutoCancel(true)
+                    .setContentIntent(pendingIntent)
                     .setContentTitle("Hint")
                     .setContentText(" لا تنسي الاذكار")
                     .setSmallIcon(R.drawable.ic_menu_next)
@@ -52,6 +57,7 @@ public class AzjarService extends IntentService {
 
             Notification notification = new Notification.Builder(getApplicationContext())
                     .setAutoCancel(true)
+                    .setContentIntent(pendingIntent)
                     .setContentTitle("Hint")
                     .setContentText(" لا تنسي الاذكار")
                     .setSmallIcon(R.drawable.ic_menu_next)
@@ -60,5 +66,11 @@ public class AzjarService extends IntentService {
             notificationManager.notify(11, notification);
 
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy: ");
     }
 }
