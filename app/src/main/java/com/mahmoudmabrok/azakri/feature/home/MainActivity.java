@@ -76,32 +76,41 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void makeAlarm() {
-
-        Intent intent = new Intent(this, ZekerReceiver.class);
+        //region sabah
+        Intent intentSabah = new Intent(this, ZekerReceiver.class);
+        intentSabah.putExtra(Constants.ZEKER_TYPE, Constants.SABAH);
         pendingIntent = PendingIntent.getBroadcast(this, 0,
-                intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                intentSabah, PendingIntent.FLAG_UPDATE_CURRENT);
+
 
         int nHour = 1;
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
-        calendar.set(Calendar.HOUR_OF_DAY, 17);
+        calendar.set(Calendar.HOUR_OF_DAY, 4);
         calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.MINUTE, 45);
 
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
                 calendar.getTimeInMillis(), 1000 * 60 * 60 * nHour, pendingIntent);
+        //endregion
+
+        //region masa
+        // Masa Part
+        Intent intentMas = new Intent(this, ZekerReceiver.class);
+        intentMas.putExtra(Constants.ZEKER_TYPE, Constants.MASA);
+        pendingIntent = PendingIntent.getBroadcast(this, 0,
+                intentMas, PendingIntent.FLAG_UPDATE_CURRENT);
 
 
         calendar = Calendar.getInstance(TimeZone.getDefault());
-        calendar.set(Calendar.HOUR_OF_DAY, 5);
+        calendar.set(Calendar.HOUR_OF_DAY, 16);
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MINUTE, 0);
 
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
                 calendar.getTimeInMillis(), 1000 * 60 * 60 * nHour, pendingIntent);
-
-
+        //endregion
     }
 
     @Override
