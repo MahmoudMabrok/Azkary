@@ -11,7 +11,7 @@ import android.util.Log;
 
 import com.mahmoudmabrok.azakri.BuildConfig;
 import com.mahmoudmabrok.azakri.R;
-import com.mahmoudmabrok.azakri.feature.home.MainActivity;
+import com.mahmoudmabrok.azakri.feature.display.DisplayAzkar;
 
 import static android.os.Build.VERSION_CODES.O;
 
@@ -29,26 +29,38 @@ public class AzjarService extends IntentService {
         if (BuildConfig.DEBUG)
             Log.d(TAG, "onHandleIntent: ");
 
-        Intent mainINtent = new Intent(AzjarService.this, MainActivity.class);
+        String type = intent.getStringExtra(Constants.ZEKER_TYPE);
+        String message, tittle = "اذكار الصباح والمساء";
+        // used to open display with its type directly
+        Intent zeker = new Intent(AzjarService.this, DisplayAzkar.class);
+        int drawableId;
+
+        if (type.equals(Constants.SABAH)) {
+            message = "اذكار الصباح";
+            zeker.putExtra(Constants.ZEKER_TYPE, Constants.SABAH);
+            drawableId = R.drawable.ic_isun;
+        } else {
+            message = "اذكار المساء";
+            zeker.putExtra(Constants.ZEKER_TYPE, Constants.MASA);
+            drawableId = R.drawable.ic_night;
+        }
 
         PendingIntent pendingIntent = PendingIntent.getActivities(AzjarService.this,
-                1000, new Intent[]{mainINtent}, PendingIntent.FLAG_UPDATE_CURRENT);
+                1000, new Intent[]{zeker}, PendingIntent.FLAG_UPDATE_CURRENT);
         
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         int id = 11;
+
         if (Build.VERSION.SDK_INT >= O) {
             NotificationChannel notificationChannel = new NotificationChannel("nn", "azkar", NotificationManager.IMPORTANCE_HIGH);
-
             notificationManager.createNotificationChannel(notificationChannel);
-
-
             Notification notification = new Notification.Builder(getApplicationContext(), "nn")
                     .setAutoCancel(true)
                     .setContentIntent(pendingIntent)
-                    .setContentTitle("Hint")
-                    .setContentText(" لا تنسي الاذكار")
-                    .setSmallIcon(R.drawable.ic_menu_next)
+                    .setContentTitle(tittle)
+                    .setContentText(message)
+                    .setSmallIcon(drawableId)
                     .build();
 
             notificationManager.notify(11, notification);
@@ -58,13 +70,12 @@ public class AzjarService extends IntentService {
             Notification notification = new Notification.Builder(getApplicationContext())
                     .setAutoCancel(true)
                     .setContentIntent(pendingIntent)
-                    .setContentTitle("Hint")
-                    .setContentText(" لا تنسي الاذكار")
-                    .setSmallIcon(R.drawable.ic_menu_next)
+                    .setContentTitle(tittle)
+                    .setContentText(message)
+                    .setSmallIcon(drawableId)
                     .build();
 
             notificationManager.notify(11, notification);
-
         }
     }
 
