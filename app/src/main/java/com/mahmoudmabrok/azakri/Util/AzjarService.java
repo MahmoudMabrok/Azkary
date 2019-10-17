@@ -44,6 +44,7 @@ public class AzjarService extends IntentService {
             zeker.putExtra(Constants.ZEKER_TYPE, Constants.MASA);
             drawableId = R.drawable.ic_night;
         }
+        Log.d(TAG, "onHandleIntent: ");
 
         PendingIntent pendingIntent = PendingIntent.getActivities(AzjarService.this,
                 1000, new Intent[]{zeker}, PendingIntent.FLAG_UPDATE_CURRENT);

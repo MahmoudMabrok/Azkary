@@ -8,4 +8,5 @@ public class Constants {
     public static final String MASA = "masa";
     public static final String LAST_POS_SABAH = "lastSabah";
     public static final String LAST_POS_MASA = "lastMasa";
+    public static final String ALARM = "alarm";
 }

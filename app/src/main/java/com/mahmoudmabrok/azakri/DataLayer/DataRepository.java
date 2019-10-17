@@ -45,5 +45,14 @@ public class DataRepository {
         return mPref.getLastPosMasa();
     }
 
+    public boolean getAlarmState() {
+        return mPref.getAlaramSet();
+    }
+
+    public void setAlarmState(boolean state) {
+        mPref.setAlaramSet(state);
+    }
+
+
 
 }

@@ -71,11 +71,14 @@ public class MainActivity extends AppCompatActivity {
                 .setShowIfAppHasCrashed(true)
                 .init();
 
-        makeAlarm();
+
+        if (!dataRepository.getAlarmState())
+            makeAlarm();
 
     }
 
     private void makeAlarm() {
+        dataRepository.setAlarmState(true);
         //region sabah
         Intent intentSabah = new Intent(this, ZekerReceiver.class);
         intentSabah.putExtra(Constants.ZEKER_TYPE, Constants.SABAH);

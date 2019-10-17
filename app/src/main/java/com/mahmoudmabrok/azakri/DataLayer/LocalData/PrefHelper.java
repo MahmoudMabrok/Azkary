@@ -64,6 +64,13 @@ public class PrefHelper {
         return sharedPreferences.getInt(Constants.LAST_POS_MASA, 0);
     }
 
+    public boolean getAlaramSet() {
+        return sharedPreferences.getBoolean(Constants.ALARM, false);
+    }
+
+    public void setAlaramSet(boolean state) {
+        sharedPreferences.edit().putBoolean(Constants.ALARM, state).commit();
+    }
 
 
 
