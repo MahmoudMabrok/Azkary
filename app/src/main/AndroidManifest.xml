@@ -20,7 +20,7 @@
         </activity>
 
         <receiver android:name=".ZekerReceiver" />
-        <service android:name=".Util.AzjarService" />
+        <service android:name=".util.AzjarService" />
     </application>
 
 </manifest>

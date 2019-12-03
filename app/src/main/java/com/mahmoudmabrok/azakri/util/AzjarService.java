@@ -1,4 +1,4 @@
-package com.mahmoudmabrok.azakri.Util;
+package com.mahmoudmabrok.azakri.util;
 
 import android.app.IntentService;
 import android.app.Notification;

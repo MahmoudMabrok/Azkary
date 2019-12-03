@@ -4,7 +4,7 @@ import android.app.AlarmManager;
 import android.app.Application;
 import android.app.PendingIntent;
 
-import com.mahmoudmabrok.azakri.DataLayer.DataRepository;
+import com.mahmoudmabrok.azakri.dataLayer.DataRepository;
 
 public class App extends Application {
 

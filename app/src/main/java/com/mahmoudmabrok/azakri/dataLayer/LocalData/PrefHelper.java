@@ -1,9 +1,9 @@
-package com.mahmoudmabrok.azakri.DataLayer.LocalData;
+package com.mahmoudmabrok.azakri.dataLayer.LocalData;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.mahmoudmabrok.azakri.Util.Constants;
+import com.mahmoudmabrok.azakri.util.Constants;
 
 public class PrefHelper {
 

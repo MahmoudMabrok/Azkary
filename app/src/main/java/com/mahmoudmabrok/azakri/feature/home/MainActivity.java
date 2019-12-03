@@ -17,11 +17,11 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mahmoudmabrok.azakri.App;
-import com.mahmoudmabrok.azakri.DataLayer.DataRepository;
 import com.mahmoudmabrok.azakri.R;
-import com.mahmoudmabrok.azakri.Util.Constants;
 import com.mahmoudmabrok.azakri.ZekerReceiver;
+import com.mahmoudmabrok.azakri.dataLayer.DataRepository;
 import com.mahmoudmabrok.azakri.feature.display.DisplayAzkar;
+import com.mahmoudmabrok.azakri.util.Constants;
 import com.tjeannin.apprate.AppRate;
 
 import java.util.Calendar;
@@ -71,9 +71,11 @@ public class MainActivity extends AppCompatActivity {
                 .setShowIfAppHasCrashed(true)
                 .init();
 
+/*
 
         if (!dataRepository.getAlarmState())
             makeAlarm();
+*/
 
     }
 
@@ -125,15 +127,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_send_feedback:
-                Toast.makeText(this, "" + dataRepository.getSabahCount(), Toast.LENGTH_SHORT).show();
-                // alarmManager.cancel(pendingIntent);
-                break;
-            case R.id.action_setting:
-                // makeAlarm();
-                showToast(this, "" + dataRepository.getMasaCount(), 1);
-                break;
+        int itemId = item.getItemId();
+        if (itemId == R.id.action_send_feedback) {
+            Toast.makeText(this, "" + dataRepository.getSabahCount(), Toast.LENGTH_SHORT).show();
+            // alarmManager.cancel(pendingIntent);
+        } else if (itemId == R.id.action_setting) {// makeAlarm();
+            showToast(this, "" + dataRepository.getMasaCount(), 1);
         }
 
         return super.onOptionsItemSelected(item);
@@ -183,9 +182,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void showToast(Context context, String text, int x) {
         Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
-
-        x = R.dimen._100sdp;
-
         toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, x, 200);
         toast.show();
 

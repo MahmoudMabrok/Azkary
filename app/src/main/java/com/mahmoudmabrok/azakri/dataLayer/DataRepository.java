@@ -1,8 +1,8 @@
-package com.mahmoudmabrok.azakri.DataLayer;
+package com.mahmoudmabrok.azakri.dataLayer;
 
 import android.content.Context;
 
-import com.mahmoudmabrok.azakri.DataLayer.LocalData.PrefHelper;
+import com.mahmoudmabrok.azakri.dataLayer.LocalData.PrefHelper;
 
 public class DataRepository {
 

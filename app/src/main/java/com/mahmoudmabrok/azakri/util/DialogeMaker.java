@@ -1,4 +1,4 @@
-package com.mahmoudmabrok.azakri.Util;
+package com.mahmoudmabrok.azakri.util;
 
 import android.content.Context;
 import android.content.DialogInterface;

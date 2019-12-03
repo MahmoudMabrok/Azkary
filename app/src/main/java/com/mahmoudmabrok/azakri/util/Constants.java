@@ -1,4 +1,4 @@
-package com.mahmoudmabrok.azakri.Util;
+package com.mahmoudmabrok.azakri.util;
 
 public class Constants {
     public static final String sabah_pref_key = "sabah";

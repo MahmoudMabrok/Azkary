@@ -100,7 +100,7 @@ public class ZekerAdapter extends RecyclerView.Adapter<ZekerAdapter.Holder> {
                     notifyItemRangeRemoved(pos, list.size());
                     zekerStateListner.onDisplayed(originalPos + 1);
                     // check if it become empty
-                    if (list.size() == 0) {
+                    if (list.isEmpty()) {
                         zekerStateListner.onFinish();
                         // to scroll to first item
                         zekerStateListner.onDisplayed(0);

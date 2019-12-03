@@ -1,4 +1,4 @@
-package com.mahmoudmabrok.azakri.DataSet;
+package com.mahmoudmabrok.azakri.dataSet;
 
 import com.mahmoudmabrok.azakri.Zeker;
 

@@ -6,11 +6,11 @@ import android.os.CountDownTimer;
 import android.util.Log;
 
 import com.mahmoudmabrok.azakri.App;
-import com.mahmoudmabrok.azakri.DataLayer.DataRepository;
-import com.mahmoudmabrok.azakri.DataSet.Data;
 import com.mahmoudmabrok.azakri.R;
-import com.mahmoudmabrok.azakri.Util.Constants;
 import com.mahmoudmabrok.azakri.Zeker;
+import com.mahmoudmabrok.azakri.dataLayer.DataRepository;
+import com.mahmoudmabrok.azakri.dataSet.Data;
+import com.mahmoudmabrok.azakri.util.Constants;
 
 import java.util.List;
 
