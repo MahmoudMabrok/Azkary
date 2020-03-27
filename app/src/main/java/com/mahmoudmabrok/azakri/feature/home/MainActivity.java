@@ -118,12 +118,13 @@ public class MainActivity extends AppCompatActivity {
         //endregion
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.main_menu, menu);
         return true;
-    }
+    }*/
+/*
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -137,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+*/
 
 
     @Override
@@ -162,15 +164,6 @@ public class MainActivity extends AppCompatActivity {
                 .title(exitTitle)
                 .content(exitMessage)
                 .show();
-
-
-/*
-        DialogeMaker.makeDialog(MainActivity.this , exitTitle , exitMessage).show();
-        */
-/*
-   new  AlertDialog.Builder(MainActivity.this).setTitle(exitTitle).setMessage(exitMessage).create().show();
-*/
-
 
     }
 
@@ -209,7 +202,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     @OnClick(R.id.masa)
@@ -233,7 +225,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
 
     }
 

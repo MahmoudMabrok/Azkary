@@ -65,7 +65,9 @@ public class DisplayAzkar extends Activity implements ZekerAdapter.ZekerStateLis
     @Override
     protected void onResume() {
         super.onResume();
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        overridePendingTransition(
+                android.R.anim.fade_in,
+                android.R.anim.fade_out);
     }
 
     private void initRv() {
