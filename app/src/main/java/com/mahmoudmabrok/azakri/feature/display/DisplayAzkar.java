@@ -5,17 +5,18 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.mahmoudmabrok.azakri.App;
 import com.mahmoudmabrok.azakri.R;
 import com.mahmoudmabrok.azakri.Zeker;
 import com.mahmoudmabrok.azakri.dataLayer.DataRepository;
 import com.mahmoudmabrok.azakri.dataSet.Data;
 import com.mahmoudmabrok.azakri.util.Constants;
+import com.mahmoudmabrok.azakri.util.Util;
 
 import java.util.List;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -74,7 +75,6 @@ public class DisplayAzkar extends Activity implements ZekerAdapter.ZekerStateLis
         ZekerAdapter adapter = new ZekerAdapter(this);
         adapter.setZekerList(zekerList);
         mRvDisplay.setAdapter(adapter);
-        mRvDisplay.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
@@ -103,6 +103,11 @@ public class DisplayAzkar extends Activity implements ZekerAdapter.ZekerStateLis
     public void onDisplayed(int pos) {
         lastClicked = pos;
         Log.d(TAG, "onDisplayed: " + pos);
+    }
+
+    @Override
+    public void onShareClick(String item) {
+        Util.share(this, item);
     }
 
     @Override

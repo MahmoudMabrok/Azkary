@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,30 +8,62 @@
     app:cardCornerRadius="@dimen/_10sdp">
 
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/tvZeker"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="@dimen/_10sdp"
             android:text="الله أكبر"
-            android:textSize="@dimen/_25ssp" />
+            android:textSize="@dimen/_25ssp"
+            app:layout_constraintBottom_toTopOf="@id/tvholderOptions"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <View
+            android:id="@+id/tvholderOptions"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:background="@color/bgTimes"
+            android:gravity="center_horizontal"
+            android:textAlignment="center"
+            android:textColor="@color/timesColor"
+            android:textSize="@dimen/_17ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvZeker" />
 
         <TextView
             android:id="@+id/tvTimes"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/bgTimes"
-            android:gravity="center_horizontal"
-            android:text="1"
-            android:textColor="@color/timesColor"
-            android:textSize="@dimen/_17ssp" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tvholderOptions"
+            app:layout_constraintHorizontal_bias="0.25"
+            app:layout_constraintStart_toStartOf="@+id/tvholderOptions"
+            app:layout_constraintTop_toBottomOf="@+id/tvZeker"
+            tools:text="aaa" />
 
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/imShare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_share_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.75"
+            app:layout_constraintStart_toStartOf="@+id/tvholderOptions"
+            app:layout_constraintTop_toBottomOf="@+id/tvZeker" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

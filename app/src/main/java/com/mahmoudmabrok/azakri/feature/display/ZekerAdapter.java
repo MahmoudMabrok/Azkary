@@ -4,7 +4,11 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.mahmoudmabrok.azakri.R;
 import com.mahmoudmabrok.azakri.Zeker;
@@ -12,8 +16,6 @@ import com.mahmoudmabrok.azakri.Zeker;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -72,6 +74,8 @@ public class ZekerAdapter extends RecyclerView.Adapter<ZekerAdapter.Holder> {
     interface ZekerStateListner {
         void onFinish();
         void onDisplayed(int pos);
+
+        void onShareClick(String item);
     }
 
     class Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -81,38 +85,52 @@ public class ZekerAdapter extends RecyclerView.Adapter<ZekerAdapter.Holder> {
         @BindView(R.id.tvTimes)
         TextView mTvTimes;
 
+        @BindView(R.id.imShare)
+        ImageView imShare;
+
+
+
         public Holder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
+
+            imShare.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            try {
-                int pos = getAdapterPosition();
-                Zeker zeker = list.get(pos);
-                int count = zeker.getCount();
-                int originalPos = tempList.indexOf(zeker);
-                if (count == 1) {
-                    list.remove(pos);
-                    notifyItemRemoved(pos);
-                    notifyItemRangeRemoved(pos, list.size());
-                    zekerStateListner.onDisplayed(originalPos + 1);
-                    // check if it become empty
-                    if (list.isEmpty()) {
-                        zekerStateListner.onFinish();
-                        // to scroll to first item
-                        zekerStateListner.onDisplayed(0);
+            int pos = getAdapterPosition();
+            Zeker zeker = list.get(pos);
+            int count = zeker.getCount();
+            int originalPos = tempList.indexOf(zeker);
+
+
+            if (v.getId() == R.id.imShare) {
+                zekerStateListner.onShareClick(zeker.getName());
+            } else {
+                try {
+
+                    if (count == 1) {
+                        list.remove(pos);
+                        notifyItemRemoved(pos);
+                        notifyItemRangeRemoved(pos, list.size());
+                        zekerStateListner.onDisplayed(originalPos + 1);
+                        // check if it become empty
+                        if (list.isEmpty()) {
+                            zekerStateListner.onFinish();
+                            // to scroll to first item
+                            zekerStateListner.onDisplayed(0);
+                        }
+                    } else {
+                        zeker.setCount(--count);
+                        list.set(pos, zeker);
+                        notifyItemChanged(pos);
+                        zekerStateListner.onDisplayed(originalPos);
                     }
-                } else {
-                    zeker.setCount(--count);
-                    list.set(pos, zeker);
-                    notifyItemChanged(pos);
-                    zekerStateListner.onDisplayed(originalPos);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         }
     }
