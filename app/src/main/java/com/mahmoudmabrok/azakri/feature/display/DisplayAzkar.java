@@ -1,9 +1,14 @@
 package com.mahmoudmabrok.azakri.feature.display;
 
 import android.app.Activity;
+import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -93,6 +98,15 @@ public class DisplayAzkar extends Activity implements ZekerAdapter.ZekerStateLis
 
             @Override
             public void onFinish() {
+                Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                // Vibrate for 500 milliseconds
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+                } else {
+                    //deprecated in API 26
+                    v.vibrate(500);
+                }
+                Toast.makeText(DisplayAzkar.this, "انتهيت من الأذكار", Toast.LENGTH_SHORT).show();
                 finish();
             }
         }.start();

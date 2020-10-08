@@ -20,17 +20,23 @@
             android:gravity="center"
             android:padding="@dimen/_10sdp"
             android:text="الله أكبر"
-            android:textSize="@dimen/_25ssp"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="20sp"
+            android:autoSizeStepGranularity="1sp"
+            android:autoSizeMinTextSize="17sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@id/tvholderOptions"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:ignore="HardcodedText,UnusedAttribute" />
 
         <View
             android:id="@+id/tvholderOptions"
             android:layout_width="0dp"
             android:layout_height="35dp"
+            android:layout_marginTop="6dp"
             android:background="@color/bgTimes"
             android:gravity="center_horizontal"
             android:textAlignment="center"
@@ -45,6 +51,7 @@
             android:id="@+id/tvTimes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#fff"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/tvholderOptions"
