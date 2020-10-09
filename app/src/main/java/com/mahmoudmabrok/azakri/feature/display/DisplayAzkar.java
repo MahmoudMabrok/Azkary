@@ -98,21 +98,23 @@ public class DisplayAzkar extends Activity implements ZekerAdapter.ZekerStateLis
 
             @Override
             public void onFinish() {
-                Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                // Vibrate for 500 milliseconds
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
-                } else {
-                    //deprecated in API 26
-                    v.vibrate(500);
-                }
                 Toast.makeText(DisplayAzkar.this, "انتهيت من الأذكار", Toast.LENGTH_SHORT).show();
                 finish();
             }
         }.start();
 
     }
-
+    @Override
+    public void vibrate() {
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        // Vibrate for 500 milliseconds
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            //deprecated in API 26
+            v.vibrate(500);
+        }
+    }
     @Override
     public void onDisplayed(int pos) {
         lastClicked = pos;
