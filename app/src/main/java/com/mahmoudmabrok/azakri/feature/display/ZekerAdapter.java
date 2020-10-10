@@ -75,6 +75,8 @@ public class ZekerAdapter extends RecyclerView.Adapter<ZekerAdapter.Holder> {
         void onFinish();
         void onDisplayed(int pos);
 
+        void vibrate();
+
         void onShareClick(String item);
     }
 
@@ -116,6 +118,9 @@ public class ZekerAdapter extends RecyclerView.Adapter<ZekerAdapter.Holder> {
                         notifyItemRemoved(pos);
                         notifyItemRangeRemoved(pos, list.size());
                         zekerStateListner.onDisplayed(originalPos + 1);
+                        zekerStateListner.vibrate();
+
+
                         // check if it become empty
                         if (list.isEmpty()) {
                             zekerStateListner.onFinish();
